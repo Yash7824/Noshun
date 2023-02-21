@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import noteContext from "../context/notes/NoteContext"
 
-
+// NoteItem changes
 const Noteitem = (props) => {
     const context = useContext(noteContext);
     const { deleteNote } = context;
