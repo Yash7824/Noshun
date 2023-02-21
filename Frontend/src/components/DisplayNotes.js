@@ -4,10 +4,11 @@ import noteContext from '../context/notes/NoteContext';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const DisplayNotes = (props) => {
   const context = useContext(noteContext);
-  const { notes, getNotes, editNote } = context;
+  const { notes, getNotes, editNote, filterTag, filterTitle } = context;
   const ref = useRef(null)
   const refClose = useRef(null)
   const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
@@ -37,6 +38,17 @@ const DisplayNotes = (props) => {
 
     // eslint-disable-next-line
   }, [])
+
+  const filterByTitle = () => {
+    // console.log("Filter by Title")
+    filterTitle();
+  }
+
+  const filterByTag = () => {
+    // console.log("Filter by Tag")
+    filterTag();
+  }
+
   return (
     <div className="row my-3">
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -74,12 +86,25 @@ const DisplayNotes = (props) => {
         </div>
       </div>
       <h2>Your Notes</h2>
+      <div className="dropdown">
+        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort By
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <Link className="dropdown-item btn btn-primary" to="#" onClick={filterByTitle}>Title</Link>
+          <Link className="dropdown-item btn btn-primary" to="#" onClick={filterByTag}>Tag</Link>
+        </div>
+      </div>
       <div className="container mx-2">
         {notes.length === 0 && 'No notes to display'}
       </div>
-      {notes.map((note) => {
-        return <Noteitem key={note._id} updateNote={updateNote} note={note} />
-      })}
+
+      <div style={{ "display": "flex", "flexDirection": "row", "marginTop": "10px", "gap": "5px" }}>
+        {notes.map((note) => {
+          return <Noteitem key={note._id} updateNote={updateNote} note={note} />
+        })}
+      </div>
+
 
       <ToastContainer />
     </div>

@@ -95,12 +95,47 @@ const NoteState = (props) => {
         }
 
         setNotes(newNotes);
+    }
 
+    const filterTitle = () => {
+        let newNotes = notes;
+        newNotes.sort((a, b) => {
+            let fa = a.title.toLowerCase(),
+                fb = b.title.toLowerCase();
 
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+
+        setNotes(newNotes);
+    }
+
+    const filterTag = () => {
+        // console.log("Getting called")
+        let newNotes = notes;
+        newNotes.sort((a, b) => {
+            let fa = a.tag.toLowerCase(),
+                fb = b.tag.toLowerCase();
+
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+
+        setNotes(newNotes);
     }
 
     return (
-        <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote, editNote }}>
+        <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote, editNote, filterTitle, filterTag }}>
             {props.children}
             <ToastContainer />
         </NoteContext.Provider>);
