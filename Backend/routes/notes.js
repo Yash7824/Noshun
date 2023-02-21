@@ -31,9 +31,9 @@ router.post(
   [
     authorization,
     [
-      body('title', 'enter a valid title').isLength({ min: 3 }),
-      body('description', 'description must be atleast 5 characters').isLength({
-        min: 5,
+      body('title', 'enter a valid title').isLength({ min: 1 }),
+      body('description', 'description must be atleast 1 character').isLength({
+        min: 1,
       }),
     ],
   ],

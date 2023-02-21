@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Noteitem from './Noteitem';
 import noteContext from '../context/notes/NoteContext';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DisplayNotes = (props) => {
   const context = useContext(noteContext);
@@ -19,6 +20,7 @@ const DisplayNotes = (props) => {
   const handleClick = (e) => {
     editNote(note.id, note.etitle, note.edescription, note.etag)
     refClose.current.click();
+    toast("Edited Successfully");
   }
 
   const onChange = (e) => {
@@ -78,6 +80,8 @@ const DisplayNotes = (props) => {
       {notes.map((note) => {
         return <Noteitem key={note._id} updateNote={updateNote} note={note} />
       })}
+
+      <ToastContainer />
     </div>
   );
 };

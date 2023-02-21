@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constants'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -26,6 +28,8 @@ const Login = (props) => {
         } else {
             alert("Invalid credentials");
         }
+
+        toast("Login Successfully");
     }
 
     const onChange = (e) => {
@@ -50,6 +54,8 @@ const Login = (props) => {
 
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </form>
+
+            <ToastContainer />
         </div>
     )
 }

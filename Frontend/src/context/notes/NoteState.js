@@ -1,6 +1,8 @@
 import NoteContext from './NoteContext';
 import { useState } from 'react';
 import { BASE_URL } from '../../constants';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NoteState = (props) => {
 
@@ -59,6 +61,8 @@ const NoteState = (props) => {
         const newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes);
 
+        toast("Note deleted");
+
     }
 
     // update note
@@ -98,6 +102,7 @@ const NoteState = (props) => {
     return (
         <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote, editNote }}>
             {props.children}
+            <ToastContainer />
         </NoteContext.Provider>);
 };
 
